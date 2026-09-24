@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+@import '@manthan/base/theme.css';
+@source '../../manthan/src';
+@source './';

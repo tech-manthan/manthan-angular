@@ -1,0 +1,75 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "analytics": false,
+    "packageManager": "npm"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "manthan": {
+      "projectType": "library",
+      "root": "projects/manthan",
+      "sourceRoot": "projects/manthan/src",
+      "prefix": "mn",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/manthan/ng-package.json",
+            "tsConfig": "projects/manthan/tsconfig.lib.json"
+          },
+          "configurations": {
+            "production": {},
+            "development": {}
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/manthan/tsconfig.spec.json",
+            "runner": "vitest"
+          }
+        }
+      }
+    },
+    "playground": {
+      "projectType": "application",
+      "root": "projects/playground",
+      "sourceRoot": "projects/playground/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/playground/src/main.ts",
+            "index": "projects/playground/src/index.html",
+            "tsConfig": "projects/playground/tsconfig.app.json",
+            "styles": [
+              "projects/playground/src/styles.css"
+            ],
+            "outputPath": "projects/playground/dist",
+            "baseHref": "./"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "buildTarget": "playground:build:development"
+          }
+        }
+      }
+    }
+  }
+}

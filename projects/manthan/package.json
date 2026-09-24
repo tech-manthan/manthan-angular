@@ -1,0 +1,18 @@
+{
+  "name": "@manthan/angular",
+  "version": "0.1.0",
+  "description": "Manthan UI for Angular: standalone, signal-based components in 11 design styles, powered by Tailwind CSS v4.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/tech-manthan/manthan-angular" },
+  "sideEffects": ["*.css"],
+  "exports": { "./theme.css": { "default": "./theme.css" } },
+  "peerDependencies": {
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0",
+    "@angular/forms": "^22.0.0",
+    "@manthan/base": "^0.1.0",
+    "@manthan/icons": "^0.1.0",
+    "tailwindcss": "^4.1.0"
+  },
+  "dependencies": { "tslib": "^2.3.0" }
+}
