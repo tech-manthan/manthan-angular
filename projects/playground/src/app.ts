@@ -106,10 +106,20 @@ const params = new URLSearchParams(location.search);
       </mn-accordion>
       <mn-pagination [total]="12" [(page)]="page" />
       <mn-toaster />
+      <div class="grid gap-6 md:grid-cols-3">
+        <div mnCard><mn-stat label="Revenue" value="$48.2K" delta="+12.4%" sentiment="positive" caption="vs last month" [trend]="trend" /></div>
+        <div mnCard class="md:col-span-2"><mn-chart type="area" label="Revenue vs costs" [data]="finance" x="month" [series]="financeSeries" /></div>
+      </div>
     </main>
   `,
 })
 export class App {
+  trend = [31, 33, 32, 36, 35, 38, 41, 40, 43, 44, 46, 48];
+  finance = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((month, i) => ({ month, revenue: 30 + i * 3 + (i % 2) * 2, costs: 22 + i }));
+  financeSeries = [
+    { key: 'revenue', label: 'Revenue' },
+    { key: 'costs', label: 'Costs' },
+  ];
   protected readonly icons = { Mail, Settings, Trash, User, LogOut };
   protected readonly styles = designStyles.map((s) => ({ value: s.id, label: s.label }));
   protected readonly style = signal(params.get('style') ?? 'default');

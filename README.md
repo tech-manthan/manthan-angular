@@ -79,6 +79,7 @@ form = injectForm({ initialValues: { email: '' }, rules: { email: [rules.require
 | Navigation | `[mnTabs]` (+ `[mnTabsList]`, `button[mnTabsTrigger]`, `[mnTabsContent]`), `mn-accordion` + `mn-accordion-item`, `mn-breadcrumb`, `mn-pagination` |
 | Overlays | `mn-dialog` + `[mnDialogTrigger]` / `[mnDialogClose]` / `[mnDialogFooter]`, `mn-popover` + `[mnPopoverTrigger]`, `mn-menu` + `[mnMenuTrigger]` + `button[mnMenuItem]`, `[mnTooltip]`, `mn-toaster` + `toast()` |
 | Feedback | `mn-alert`, `mn-progress`, `mn-progress-circle`, `mn-spinner`, `mn-skeleton` |
+| Charts | `mn-chart` (line, area, bar, donut, sparkline; `label`, `[(hidden)]`, `(activeChange)`), `mn-stat` (value, delta, sentiment, `[trend]` sparkline) |
 | Advanced | `mn-file-upload` (CVA), `injectForm` + `[mnFormField]`, `mnValidator`, `mn-data-table` (sort, search, `[(selected)]`, pagination, `<ng-template mnCell="key">` cells), `mn-combobox` (CVA, filtering, groups), `mn-command` + `mn-command-dialog` (⌘K, `[(open)]`), `mn-calendar`, `mn-date-picker` (CVA, ISO `YYYY-MM-DD`, `name` for forms), `mn-toggle-group` + `button[mnToggleGroupItem]` |
 
 Import individual classes (`MnButton`, `MnDialog`…) or `MN_COMPONENTS`. Recipes and helpers from `@manthan/base` are re-exported.

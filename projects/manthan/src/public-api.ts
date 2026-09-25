@@ -13,4 +13,5 @@ export * from './lib/feedback';
 export * from './lib/advanced';
 export * from './lib/data-table';
 export * from './lib/forms-files';
+export * from './lib/chart';
 export { MN_COMPONENTS } from './lib/all';

@@ -7,7 +7,7 @@
     "dev": "ng serve playground",
     "build:playground": "ng build playground",
     "test": "ng test manthan --watch=false",
-    "typecheck": "tsc -p projects/manthan/tsconfig.lib.json --noEmit"
+    "typecheck": "tsc -p projects/manthan/tsconfig.lib.json --noEmit --sourceMap"
   },
   "devDependencies": {
     "@angular/build": "^22.2.0",
