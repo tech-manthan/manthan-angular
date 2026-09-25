@@ -1,5 +1,6 @@
 import { MnCalendar, MnCombobox, MnCommand, MnCommandDialog, MnDatePicker, MnToggleGroup, MnToggleGroupItem } from './advanced';
 import { MnButton, MnButtonGroup } from './button';
+import { MnFileUpload, MnFormField } from './forms-files';
 import { MnCellTemplate, MnDataTable } from './data-table';
 import {
   MnAvatar,
@@ -131,4 +132,6 @@ export const MN_COMPONENTS = [
   MnToggleGroupItem,
   MnDataTable,
   MnCellTemplate,
+  MnFileUpload,
+  MnFormField,
 ] as const;

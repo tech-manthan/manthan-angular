@@ -50,6 +50,25 @@ export class App {
 
 Set the style on `<html data-mn-style="fluent" data-mn-theme="dark">`: `default`, `glass`, `neu`, `brutal`, `material`, `fluent`, `clay`, `retro`, `neon`, `minimal`, `skeuo`.
 
+## Forms
+
+Reactive Forms already work with every Manthan control. Manthan rules can be plugged in as validators:
+
+```ts
+group = new FormGroup({ email: new FormControl('', mnValidator(rules.required(), rules.email())) });
+// <mn-field label="Email" [error]="mnError(group.controls.email)"><input mnInput formControlName="email" /></mn-field>
+```
+
+Or use signals with `injectForm`:
+
+```ts
+form = injectForm({ initialValues: { email: '' }, rules: { email: [rules.required(), rules.email()] }, onSubmit: save });
+// <form (submit)="form.handleSubmit($event)">
+//   <mn-field label="Email" [error]="form.errors().email"><input mnInput [mnFormField]="form" name="email" /></mn-field>
+```
+
+`<mn-file-upload name="docs" accept=".pdf" multiple [maxSize]="5e6" [(files)]="files" />` supports drag and drop, paste and type/size/count checks, and works as a form control.
+
 ## API
 
 | Group | Selectors |
@@ -60,7 +79,7 @@ Set the style on `<html data-mn-style="fluent" data-mn-theme="dark">`: `default`
 | Navigation | `[mnTabs]` (+ `[mnTabsList]`, `button[mnTabsTrigger]`, `[mnTabsContent]`), `mn-accordion` + `mn-accordion-item`, `mn-breadcrumb`, `mn-pagination` |
 | Overlays | `mn-dialog` + `[mnDialogTrigger]` / `[mnDialogClose]` / `[mnDialogFooter]`, `mn-popover` + `[mnPopoverTrigger]`, `mn-menu` + `[mnMenuTrigger]` + `button[mnMenuItem]`, `[mnTooltip]`, `mn-toaster` + `toast()` |
 | Feedback | `mn-alert`, `mn-progress`, `mn-progress-circle`, `mn-spinner`, `mn-skeleton` |
-| Advanced | `mn-data-table` (sort, search, `[(selected)]`, pagination, `<ng-template mnCell="key">` cells), `mn-combobox` (CVA, filtering, groups), `mn-command` + `mn-command-dialog` (⌘K, `[(open)]`), `mn-calendar`, `mn-date-picker` (CVA, ISO `YYYY-MM-DD`, `name` for forms), `mn-toggle-group` + `button[mnToggleGroupItem]` |
+| Advanced | `mn-file-upload` (CVA), `injectForm` + `[mnFormField]`, `mnValidator`, `mn-data-table` (sort, search, `[(selected)]`, pagination, `<ng-template mnCell="key">` cells), `mn-combobox` (CVA, filtering, groups), `mn-command` + `mn-command-dialog` (⌘K, `[(open)]`), `mn-calendar`, `mn-date-picker` (CVA, ISO `YYYY-MM-DD`, `name` for forms), `mn-toggle-group` + `button[mnToggleGroupItem]` |
 
 Import individual classes (`MnButton`, `MnDialog`…) or `MN_COMPONENTS`. Recipes and helpers from `@manthan/base` are re-exported.
 
