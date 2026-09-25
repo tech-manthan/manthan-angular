@@ -1,5 +1,6 @@
 import { MnCalendar, MnCombobox, MnCommand, MnCommandDialog, MnDatePicker, MnToggleGroup, MnToggleGroupItem } from './advanced';
 import { MnButton, MnButtonGroup } from './button';
+import { MnCellTemplate, MnDataTable } from './data-table';
 import {
   MnAvatar,
   MnAvatarGroup,
@@ -128,4 +129,6 @@ export const MN_COMPONENTS = [
   MnDatePicker,
   MnToggleGroup,
   MnToggleGroupItem,
+  MnDataTable,
+  MnCellTemplate,
 ] as const;

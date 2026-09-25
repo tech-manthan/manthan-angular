@@ -94,6 +94,11 @@ const params = new URLSearchParams(location.search);
         </div>
         <div mnCard><mn-calendar [(value)]="due" /></div>
       </div>
+      <mn-data-table [rows]="invoices" [columns]="invoiceColumns" [pageSize]="5" selectable caption="Recent invoices">
+        <ng-template mnCell="status" let-value="value">
+          <span mnBadge size="sm" [tone]="value === 'Paid' ? 'success' : value === 'Overdue' ? 'danger' : 'warning'">{{ value }}</span>
+        </ng-template>
+      </mn-data-table>
       <mn-command-dialog [options]="commands" (select)="command($event)" />
       <mn-accordion>
         <mn-accordion-item title="Is it accessible?" [open]="true">Yes: native elements and WAI-ARIA patterns.</mn-accordion-item>
@@ -121,6 +126,18 @@ export class App {
   protected readonly commands = [
     { value: 'profile', label: 'Profile', group: 'Settings', shortcut: 'mod+p' },
     { value: 'glass', label: 'Switch to Glassmorphism', group: 'Styles' },
+  ];
+  protected readonly invoices = Array.from({ length: 14 }, (_, i) => ({
+    id: `INV-${1042 + i}`,
+    customer: ['Ada Lovelace', 'Alan Turing', 'Grace Hopper', 'Linus Torvalds'][i % 4],
+    status: ['Paid', 'Pending', 'Overdue'][(i * 5) % 3],
+    amount: ((i * 7919) % 4800) + 120,
+  }));
+  protected readonly invoiceColumns = [
+    { key: 'id', header: 'Invoice' },
+    { key: 'customer', header: 'Customer' },
+    { key: 'status', header: 'Status' },
+    { key: 'amount', header: 'Amount', align: 'end' as const, format: (v: unknown) => `$${(v as number).toLocaleString('en-US')}` },
   ];
   protected readonly framework = signal<string | null>('angular');
   protected readonly due = signal<string | null>(null);

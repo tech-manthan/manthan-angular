@@ -11,4 +11,5 @@ export * from './lib/navigation';
 export * from './lib/overlay';
 export * from './lib/feedback';
 export * from './lib/advanced';
+export * from './lib/data-table';
 export { MN_COMPONENTS } from './lib/all';
