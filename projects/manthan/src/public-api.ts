@@ -10,4 +10,5 @@ export * from './lib/form';
 export * from './lib/navigation';
 export * from './lib/overlay';
 export * from './lib/feedback';
+export * from './lib/advanced';
 export { MN_COMPONENTS } from './lib/all';

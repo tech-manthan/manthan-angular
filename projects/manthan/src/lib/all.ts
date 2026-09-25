@@ -1,3 +1,4 @@
+import { MnCalendar, MnCombobox, MnCommand, MnCommandDialog, MnDatePicker, MnToggleGroup, MnToggleGroupItem } from './advanced';
 import { MnButton, MnButtonGroup } from './button';
 import {
   MnAvatar,
@@ -120,4 +121,11 @@ export const MN_COMPONENTS = [
   MnProgressCircle,
   MnSpinner,
   MnSkeleton,
+  MnCombobox,
+  MnCommand,
+  MnCommandDialog,
+  MnCalendar,
+  MnDatePicker,
+  MnToggleGroup,
+  MnToggleGroupItem,
 ] as const;

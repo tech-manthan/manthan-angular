@@ -83,6 +83,18 @@ const params = new URLSearchParams(location.search);
           </div>
         </div>
       </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div mnCard>
+          <mn-field label="Framework"><mn-combobox placeholder="Search…" [options]="frameworks" [(value)]="framework" /></mn-field>
+          <mn-field label="Due date"><mn-date-picker name="due" [(value)]="due" /></mn-field>
+          <mn-toggle-group [(value)]="range">
+            <button mnToggleGroupItem="day">Day</button><button mnToggleGroupItem="week">Week</button><button mnToggleGroupItem="month">Month</button>
+          </mn-toggle-group>
+          <p class="text-sm text-fg-muted">{{ framework() }} · {{ due() ?? 'no date' }} · {{ range() }}</p>
+        </div>
+        <div mnCard><mn-calendar [(value)]="due" /></div>
+      </div>
+      <mn-command-dialog [options]="commands" (select)="command($event)" />
       <mn-accordion>
         <mn-accordion-item title="Is it accessible?" [open]="true">Yes: native elements and WAI-ARIA patterns.</mn-accordion-item>
         <mn-accordion-item title="Can I theme it?">Eleven styles plus your own tokens.</mn-accordion-item>
@@ -101,6 +113,18 @@ export class App {
   protected readonly agree = signal(true);
   protected readonly tab = signal('overview');
   protected readonly page = signal(4);
+  protected readonly frameworks = [
+    { value: 'react', label: 'React', group: 'UI' },
+    { value: 'angular', label: 'Angular', group: 'UI' },
+    { value: 'analog', label: 'Analog', group: 'Meta' },
+  ];
+  protected readonly commands = [
+    { value: 'profile', label: 'Profile', group: 'Settings', shortcut: 'mod+p' },
+    { value: 'glass', label: 'Switch to Glassmorphism', group: 'Styles' },
+  ];
+  protected readonly framework = signal<string | null>('angular');
+  protected readonly due = signal<string | null>(null);
+  protected readonly range = signal<string | null | string[]>('week');
   protected email = '';
   protected volume = 40;
 
@@ -115,6 +139,10 @@ export class App {
   }
   protected deleted() {
     toast.error('Project deleted');
+  }
+  protected command(value: string) {
+    if (value === 'glass') this.style.set('glass');
+    else toast.info(value);
   }
   protected settings() {
     toast.info('Settings');

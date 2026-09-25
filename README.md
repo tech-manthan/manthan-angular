@@ -60,6 +60,7 @@ Set the style on `<html data-mn-style="fluent" data-mn-theme="dark">`: `default`
 | Navigation | `[mnTabs]` (+ `[mnTabsList]`, `button[mnTabsTrigger]`, `[mnTabsContent]`), `mn-accordion` + `mn-accordion-item`, `mn-breadcrumb`, `mn-pagination` |
 | Overlays | `mn-dialog` + `[mnDialogTrigger]` / `[mnDialogClose]` / `[mnDialogFooter]`, `mn-popover` + `[mnPopoverTrigger]`, `mn-menu` + `[mnMenuTrigger]` + `button[mnMenuItem]`, `[mnTooltip]`, `mn-toaster` + `toast()` |
 | Feedback | `mn-alert`, `mn-progress`, `mn-progress-circle`, `mn-spinner`, `mn-skeleton` |
+| Advanced | `mn-combobox` (CVA, filtering, groups), `mn-command` + `mn-command-dialog` (⌘K, `[(open)]`), `mn-calendar`, `mn-date-picker` (CVA, ISO `YYYY-MM-DD`, `name` for forms), `mn-toggle-group` + `button[mnToggleGroupItem]` |
 
 Import individual classes (`MnButton`, `MnDialog`…) or `MN_COMPONENTS`. Recipes and helpers from `@manthan/base` are re-exported.
 
