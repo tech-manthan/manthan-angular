@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [claude/great-turing-ihfjsd]
+  pull_request:
+    branches: [claude/great-turing-ihfjsd]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout manthan-icons
+        uses: actions/checkout@v4
+        with:
+          repository: tech-manthan/manthan-icons
+          path: manthan-icons
+
+      - name: Checkout manthan-base
+        uses: actions/checkout@v4
+        with:
+          repository: tech-manthan/manthan-base
+          path: manthan-base
+
+      - name: Checkout manthan-angular
+        uses: actions/checkout@v4
+        with:
+          path: manthan-angular
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check Node version meets Angular's floor
+        run: node -e "const [maj,min,patch]=process.versions.node.split('.').map(Number); if (maj<22 || (maj===22 && (min<22 || (min===22 && patch<3)))) { console.error('Node', process.versions.node, 'is below the 22.22.3 floor Angular CLI needs'); process.exit(1); } console.log('Node', process.versions.node, 'OK');"
+
+      - name: Build manthan-icons
+        working-directory: manthan-icons
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build manthan-base
+        working-directory: manthan-base
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install manthan-angular
+        working-directory: manthan-angular
+        run: npm ci
+
+      - name: Build
+        working-directory: manthan-angular
+        run: npm run build
+
+      - name: Test
+        working-directory: manthan-angular
+        run: npm test
+
+      - name: Typecheck
+        working-directory: manthan-angular
+        run: npm run typecheck
