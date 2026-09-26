@@ -1,0 +1,76 @@
+name: Release
+
+# SKELETON — not wired to actually publish yet. Needs an NPM_TOKEN repo
+# secret (an npm automation token for the @manthan org/scope) before the
+# `changesets/action` publish step below can succeed; until then this runs
+# safely and fails cleanly at that one step. See CLAUDE.md roadmap item 2.
+#
+# The publishable package is projects/manthan (declared as an npm workspace
+# from this repo's root package.json), not the root itself — that's why
+# `changesets/action`'s cwd stays at manthan-angular (where the changeset
+# scripts and workspace config live) rather than projects/manthan.
+
+on:
+  push:
+    branches: [main]
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout manthan-icons
+        uses: actions/checkout@v4
+        with:
+          repository: tech-manthan/manthan-icons
+          path: manthan-icons
+
+      - name: Checkout manthan-base
+        uses: actions/checkout@v4
+        with:
+          repository: tech-manthan/manthan-base
+          path: manthan-base
+
+      - name: Checkout manthan-angular
+        uses: actions/checkout@v4
+        with:
+          path: manthan-angular
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Build manthan-icons
+        working-directory: manthan-icons
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build manthan-base
+        working-directory: manthan-base
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install manthan-angular
+        working-directory: manthan-angular
+        run: npm ci
+
+      - name: Build manthan-angular
+        working-directory: manthan-angular
+        run: npm run build
+
+      - name: Create a "Version Packages" PR, or publish when one is merged
+        uses: changesets/action@v1
+        with:
+          cwd: manthan-angular
+          version: npm run version-packages
+          publish: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
