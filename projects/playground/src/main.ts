@@ -1,4 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { App } from './app';
+import { DemoRoot } from './demo';
 
-bootstrapApplication(App).catch((err) => console.error(err));
+const isDemo = new URLSearchParams(location.search).has('c');
+bootstrapApplication(isDemo ? DemoRoot : App).catch((err) => console.error(err));
