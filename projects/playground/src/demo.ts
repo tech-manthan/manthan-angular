@@ -21,7 +21,17 @@ class InputDemo {
   protected value = '';
 }
 
-const demos: Record<string, Type<unknown>> = { button: ButtonDemo, input: InputDemo };
+@Component({
+  selector: 'app-demo-dialog',
+  imports: [MN_COMPONENTS],
+  template: `
+    <button mnButton [mnDialogTrigger]="dlg">Open</button>
+    <mn-dialog #dlg title="Delete project?" description="This permanently deletes the project.">Are you sure?</mn-dialog>
+  `,
+})
+class DialogDemo {}
+
+const demos: Record<string, Type<unknown>> = { button: ButtonDemo, input: InputDemo, dialog: DialogDemo };
 
 @Component({
   // Reuses App's selector ('app-root'): only one of App/DemoRoot is ever
