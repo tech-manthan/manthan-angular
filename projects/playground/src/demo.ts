@@ -1,5 +1,6 @@
 import { Component, Type } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MN_COMPONENTS } from '@manthan/angular';
 
 const slug = new URLSearchParams(location.search).get('c');
@@ -11,7 +12,16 @@ const slug = new URLSearchParams(location.search).get('c');
 })
 class ButtonDemo {}
 
-const demos: Record<string, Type<unknown>> = { button: ButtonDemo };
+@Component({
+  selector: 'app-demo-input',
+  imports: [MN_COMPONENTS, FormsModule],
+  template: `<input mnInput [(ngModel)]="value" placeholder="you@example.com" />`,
+})
+class InputDemo {
+  protected value = '';
+}
+
+const demos: Record<string, Type<unknown>> = { button: ButtonDemo, input: InputDemo };
 
 @Component({
   // Reuses App's selector ('app-root'): only one of App/DemoRoot is ever
