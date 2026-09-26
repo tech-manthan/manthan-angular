@@ -14,7 +14,12 @@ class ButtonDemo {}
 const demos: Record<string, Type<unknown>> = { button: ButtonDemo };
 
 @Component({
-  selector: 'app-demo-root',
+  // Reuses App's selector ('app-root'): only one of App/DemoRoot is ever
+  // bootstrapped (see main.ts), and bootstrapApplication requires its
+  // component's selector to already exist in index.html — index.html only
+  // has <app-root>, so DemoRoot must bind to that same host element rather
+  // than a second selector index.html was never given.
+  selector: 'app-root',
   imports: [MN_COMPONENTS, NgComponentOutlet],
   template: `
     @if (demo) {
