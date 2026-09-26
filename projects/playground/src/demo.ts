@@ -31,7 +31,30 @@ class InputDemo {
 })
 class DialogDemo {}
 
-const demos: Record<string, Type<unknown>> = { button: ButtonDemo, input: InputDemo, dialog: DialogDemo };
+@Component({
+  selector: 'app-demo-data-table',
+  imports: [MN_COMPONENTS],
+  template: `<mn-data-table [columns]="columns" [rows]="rows" [pageSize]="3" />`,
+})
+class DataTableDemo {
+  protected rows = [
+    { id: 'INV-1001', customer: 'Ada Lovelace', status: 'Paid' },
+    { id: 'INV-1002', customer: 'Alan Turing', status: 'Pending' },
+    { id: 'INV-1003', customer: 'Grace Hopper', status: 'Overdue' },
+  ];
+  protected columns = [
+    { key: 'id', header: 'Invoice' },
+    { key: 'customer', header: 'Customer' },
+    { key: 'status', header: 'Status' },
+  ];
+}
+
+const demos: Record<string, Type<unknown>> = {
+  button: ButtonDemo,
+  input: InputDemo,
+  dialog: DialogDemo,
+  'data-table': DataTableDemo,
+};
 
 @Component({
   // Reuses App's selector ('app-root'): only one of App/DemoRoot is ever
