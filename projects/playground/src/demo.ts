@@ -1,63 +1,13 @@
 import { Component, Type } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MN_COMPONENTS } from '@manthan/angular';
+import { ButtonDemo } from './demos/button-demo';
+import { InputDemo } from './demos/input-demo';
+import { DialogDemo } from './demos/dialog-demo';
+import { DataTableDemo } from './demos/data-table-demo';
+import { ChartDemo } from './demos/chart-demo';
 
 const slug = new URLSearchParams(location.search).get('c');
-
-@Component({
-  selector: 'app-demo-button',
-  imports: [MN_COMPONENTS],
-  template: `<button mnButton variant="soft" tone="primary">Click me</button>`,
-})
-class ButtonDemo {}
-
-@Component({
-  selector: 'app-demo-input',
-  imports: [MN_COMPONENTS, FormsModule],
-  template: `<input mnInput [(ngModel)]="value" placeholder="you@example.com" />`,
-})
-class InputDemo {
-  protected value = '';
-}
-
-@Component({
-  selector: 'app-demo-dialog',
-  imports: [MN_COMPONENTS],
-  template: `
-    <button mnButton [mnDialogTrigger]="dlg">Open</button>
-    <mn-dialog #dlg title="Delete project?" description="This permanently deletes the project.">Are you sure?</mn-dialog>
-  `,
-})
-class DialogDemo {}
-
-@Component({
-  selector: 'app-demo-data-table',
-  imports: [MN_COMPONENTS],
-  template: `<mn-data-table [columns]="columns" [rows]="rows" [pageSize]="3" />`,
-})
-class DataTableDemo {
-  protected rows = [
-    { id: 'INV-1001', customer: 'Ada Lovelace', status: 'Paid' },
-    { id: 'INV-1002', customer: 'Alan Turing', status: 'Pending' },
-    { id: 'INV-1003', customer: 'Grace Hopper', status: 'Overdue' },
-  ];
-  protected columns = [
-    { key: 'id', header: 'Invoice' },
-    { key: 'customer', header: 'Customer' },
-    { key: 'status', header: 'Status' },
-  ];
-}
-
-@Component({
-  selector: 'app-demo-chart',
-  imports: [MN_COMPONENTS],
-  template: `<mn-chart type="area" [data]="data" x="month" [series]="series" [height]="200" />`,
-})
-class ChartDemo {
-  protected data = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((month, i) => ({ month, revenue: 30 + i * 3 }));
-  protected series = [{ key: 'revenue', label: 'Revenue' }];
-}
 
 const demos: Record<string, Type<unknown>> = {
   button: ButtonDemo,
